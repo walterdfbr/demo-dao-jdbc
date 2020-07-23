@@ -58,18 +58,9 @@ public class VendedorDaoJDBC implements VendedorDao{
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
-                Departamento dep = new Departamento();
-                dep.setId(rs.getInt("DepartmentId"));
-                dep.setName(rs.getString("DepName"));
+                Departamento dep = intantiateDepartamento (rs);
                 
-                Vendedor obj = new Vendedor ();
-                obj.setId(rs.getInt("Id"));
-                obj.setNome(rs.getString("Name"));
-                obj.setEmail(rs.getString("Email"));
-                obj.setSalario_base(rs.getDouble("BaseSalary"));
-                obj.setAniversario(rs.getDate("BirthDate"));
-                obj.setDepartamento(dep);
-                return obj;
+                Vendedor obj = intantiateVendedor (rs, dep);
             }
                     return null;
         }
@@ -86,5 +77,23 @@ public class VendedorDaoJDBC implements VendedorDao{
     public List<Vendedor> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    private Vendedor intantiateVendedor(ResultSet rs, Departamento dep) throws SQLException {
+                Vendedor obj = new Vendedor ();
+                obj.setId(rs.getInt("Id"));
+                obj.setNome(rs.getString("Name"));
+                obj.setEmail(rs.getString("Email"));
+                obj.setSalario_base(rs.getDouble("BaseSalary"));
+                obj.setAniversario(rs.getDate("BirthDate"));
+                obj.setDepartamento(dep);
+                return obj;
+    }
+
+    private Departamento intantiateDepartamento(ResultSet rs) throws SQLException {
+        Departamento dep = new Departamento();
+                dep.setId(rs.getInt("DepartmentId"));
+                dep.setName(rs.getString("DepName"));
+                return dep;
+    }  
+
 }
