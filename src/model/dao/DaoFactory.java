@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+import db.DB;
 import model.dao.Impl.VendedorDaoJDBC;
 
 /**
@@ -14,7 +15,7 @@ import model.dao.Impl.VendedorDaoJDBC;
 public class DaoFactory {
         
         public static VendedorDao createVendedorDao() {
-        return new VendedorDaoJDBC();
+        return new VendedorDaoJDBC(DB.getConnection());
     }
 }
 
