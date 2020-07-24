@@ -46,6 +46,12 @@ public class Programa {
         for (Vendedor obj : list) {
             System.out.println(obj);
         }
+        
+        System.out.println("=== Test 4: Lista Vendedor Inserção ===");
+        
+        Vendedor novo_vendedor = new Vendedor(null, "Greg", "greg@gmail.com", new Date(), 4000.00, departamento);
+        vendedorDao.insert(novo_vendedor);
+        System.out.println("Inserido novo id= "+novo_vendedor.getId());
     
     }
 }
